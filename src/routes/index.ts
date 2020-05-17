@@ -1,9 +1,9 @@
-import * as express from "express";
+import { Router } from "express";
 
-const router: express.Router = express.Router();
+import { index } from "../controllers";
 
-router.get("/", (req: express.Request, res: express.Response) => {
-  res.sendStatus(200);
-});
+const router = Router();
+
+router.get("/", index);
 
 export default router;
