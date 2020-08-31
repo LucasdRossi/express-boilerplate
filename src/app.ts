@@ -1,10 +1,9 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import { router } from "./router";
 
-import router from "./routes";
-
-class App {
+export class App {
   public express: express.Application;
 
   constructor() {
@@ -14,17 +13,17 @@ class App {
     this.routes();
   }
 
-  private middlewares(): void {
+  private middlewares = () => {
     this.express.use(cors());
     this.express.use(express.json());
-    // files
-    // this.express.use(express.urlencoded({ extended: true }));
     this.express.use(morgan("dev"));
-  }
+  };
 
-  private routes(): void {
+  private routes = () => {
     this.express.use(router);
-  }
-}
+  };
 
-export default new App().express;
+  start = (p: number) => {
+    this.express.listen(p, () => console.log(`Starting express on port ${p}`));
+  };
+}

@@ -1,9 +1,11 @@
 import { config } from "dotenv";
 import { resolve } from "path";
-import app from "./app";
-
 config({ path: resolve(__dirname, "../.env") });
 
-const PORT = process.env.PORT || 4000;
+import { App } from "./app";
 
-app.listen(PORT, () => console.log(`=> LOG: listening to port ${PORT}`));
+const app = new App();
+
+const PORT = parseInt(process.env.PORT) || 4000;
+
+app.start(PORT);
